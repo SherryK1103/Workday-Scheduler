@@ -1,10 +1,15 @@
 var buttons = document.getElementsByClassName("saveBtn")
-console.log(buttons)
+
+let container = $('#container');
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+
+let dailyHours = [9, 10, 11, 12, 13, 14, 15]
+
 $(function () {
-  for (let i = 0; i < buttons.length; i++) {
+  for (let i = 0; i < dailyHours.length; i++) {
+    /*
     const element = buttons[i];
     element.addEventListener('click', function(event) {
       var hour = event.currentTarget.parentNode.id;
@@ -13,6 +18,30 @@ $(function () {
     localStorage.setItem(hour, text);
     }
     )
+    */
+
+    let americanHrs = dailyHours[i]+'AM';
+
+    if(dailyHours[i] >= 12){
+      americanHrs = dailyHours[i]+'PM';
+      if(dailyHours[i] > 12 ){
+        americanHrs = dailyHours[i] - 12 + 'PM';
+      }
+    }
+
+    let mainCointainer = $("<div class='row time-block future'>");// make "future" class dynamic to listen to conditions
+    let hourCol = $("<div class='col-2 col-md-1 hour text-center py-3'>");
+    let textCol = $("<textarea class='col-8 col-md-10 description' rows='3'>");
+    let btnCol = $("<button class='btn saveBtn col-2 col-md-1' aria-label='save'>");
+    let btnIcon = $("<i class='fas fa-save' aria-hidden='true'>");
+
+
+    btnCol.append(btnIcon)
+    hourCol.append(americanHrs)
+    mainCointainer.append(hourCol, textCol, btnCol);
+    container.append(mainCointainer);
+
+
   }
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
