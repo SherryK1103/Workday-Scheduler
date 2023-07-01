@@ -5,7 +5,7 @@ let container = $('#container');
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-let dailyHours = [9, 10, 11, 12, 13, 14, 15]
+let dailyHours = [9, 10, 11, 12, 13, 14, 15, 16, 17]
 
 $(function () {
   for (let i = 0; i < dailyHours.length; i++) {
@@ -29,17 +29,41 @@ $(function () {
       }
     }
 
-    let mainCointainer = $("<div class='row time-block future'>");// make "future" class dynamic to listen to conditions
+    let mainContainer = $("<div class='row time-block'>");// make "future" class dynamic to listen to conditions
     let hourCol = $("<div class='col-2 col-md-1 hour text-center py-3'>");
     let textCol = $("<textarea class='col-8 col-md-10 description' rows='3'>");
     let btnCol = $("<button class='btn saveBtn col-2 col-md-1' aria-label='save'>");
     let btnIcon = $("<i class='fas fa-save' aria-hidden='true'>");
 
 
+    var newDate = dayjs().format('HH')
+    console.log(newDate)
+    if(parseInt(newDate) < dailyHours[i]) { 
+      mainContainer.addClass('future'); // future class
+    } else if((parseInt(newDate) == dailyHours[i])) { // present
+      mainContainer.addClass('present');
+    } else if((parseInt(newDate) > dailyHours[i])) { // past condition
+      mainContainer.addClass('past');
+    }
+
+    btnCol.click(function(event){
+      event.preventDefault();
+      console.log(event.target)
+      if(event.target.tagName==='i'){
+// first target the textarea element, then target timeblock element
+// get value from textarea element and timeblock element
+// use localStorage.SetItem to store the data in local storage
+      }
+    })
+
+    
+
+  
+
     btnCol.append(btnIcon)
     hourCol.append(americanHrs)
-    mainCointainer.append(hourCol, textCol, btnCol);
-    container.append(mainCointainer);
+    mainContainer.append(hourCol, textCol, btnCol);
+    container.append(mainContainer);
 
 
   }
