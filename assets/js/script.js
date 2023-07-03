@@ -5,21 +5,10 @@ let container = $('#container');
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-let dailyHours = [9, 10, 11, 12, 13, 14, 15, 16, 17]
+let dailyHours = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 
 $(function () {
   for (let i = 0; i < dailyHours.length; i++) {
-    /*
-    const element = buttons[i];
-    element.addEventListener('click', function(event) {
-      var hour = event.currentTarget.parentNode.id;
-      var text = event.currentTarget.previousElementSibling.value;
-      
-    localStorage.setItem(hour, text);
-    }
-    )
-    */
-
     let americanHrs = dailyHours[i]+'AM';
 
     if(dailyHours[i] >= 12){
@@ -29,13 +18,14 @@ $(function () {
       }
     }
 
-    let mainContainer = $("<div class='row time-block'>");// make "future" class dynamic to listen to conditions
+    let mainContainer = $("<div class='row time-block'>");
     let hourCol = $("<div class='col-2 col-md-1 hour text-center py-3'>");
     let textCol = $("<textarea class='col-8 col-md-10 description' rows='3'>");
+    textCol.attr("id", "textarea-" +i);
     let btnCol = $("<button class='btn saveBtn col-2 col-md-1' aria-label='save'>");
     let btnIcon = $("<i class='fas fa-save' aria-hidden='true'>");
 
-
+    
     var newDate = dayjs().format('HH')
     console.log(newDate)
     if(parseInt(newDate) < dailyHours[i]) { 
@@ -46,27 +36,23 @@ $(function () {
       mainContainer.addClass('past');
     }
 
-    btnCol.click(function(event){
-      event.preventDefault();
-      console.log(event.target)
-      if(event.target.tagName==='i'){
-// first target the textarea element, then target timeblock element
-// get value from textarea element and timeblock element
-// use localStorage.SetItem to store the data in local storage
-      }
-    })
+   let textareaValue = localStorage.getItem('notes' + i);
 
-    
-
-  
-
-    btnCol.append(btnIcon)
-    hourCol.append(americanHrs)
+    textCol.text(textareaValue);
+    btnCol.append(btnIcon);
+    hourCol.append(americanHrs);
     mainContainer.append(hourCol, textCol, btnCol);
     container.append(mainContainer);
 
-
   }
+
+  $(".saveBtn").on('click', function() {
+    for (let index = 0; index < dailyHours.length; index++) {
+      const elementValue = $('#textarea-' + index).val();
+      console.log(elementValue)
+      localStorage.setItem('notes' + index, elementValue);
+    }
+  })
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
