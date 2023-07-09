@@ -10,7 +10,6 @@ let dailyHours = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 $(function () {
   for (let i = 0; i < dailyHours.length; i++) {
     let americanHrs = dailyHours[i]+'AM';
-
     if(dailyHours[i] >= 12){
       americanHrs = dailyHours[i]+'PM';
       if(dailyHours[i] > 12 ){
@@ -24,7 +23,6 @@ $(function () {
     textCol.attr("id", "textarea-" +i);
     let btnCol = $("<button class='btn saveBtn col-2 col-md-1' aria-label='save'>");
     let btnIcon = $("<i class='fas fa-save' aria-hidden='true'>");
-
     
     var newDate = dayjs().format('HH')
     console.log(newDate)
@@ -43,7 +41,6 @@ $(function () {
     hourCol.append(americanHrs);
     mainContainer.append(hourCol, textCol, btnCol);
     container.append(mainContainer);
-
   }
 
   $(".saveBtn").on('click', function() {
