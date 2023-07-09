@@ -15,7 +15,7 @@ https://sherryk1103.github.io/Workday-Scheduler-5/
 
 ## Usage
 
-![workday scheduler 5 screenshot](https://github.com/SherryK1103/workday-scheduler-5/blob/assets/images/css-port-image.png?raw=true)
+![workday scheduler 5 screenshot](./assets/images/workday-scheduler-5.png)
 
 ## Process Steps
 
