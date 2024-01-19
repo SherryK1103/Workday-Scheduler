@@ -11,7 +11,7 @@ Git clone <paste SSH key>
 
 ## Deployed Link
 
-https://sherryk1103.github.io/Workday-Scheduler-5/
+https://sherryk1103.github.io/Workday-Scheduler/
 
 ## Usage
 
